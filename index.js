@@ -53,9 +53,14 @@ function displayList () {
 
         if (elem.submenu) {
           const listSubSubmenu = document.createElement("ul");
+          listSubSubmenu.classList.add("subSubmenu");
           itemSubMenu.addEventListener("mouseenter", () => {
             itemSubMenu.append(listSubSubmenu);
-          });
+          })
+
+          itemSubMenu.addEventListener("mouseleave", () => {
+            itemSubMenu.querySelector(".subSubmenu").remove();
+          })
 
           elem.submenu.forEach(function (subElem) {
             const itemSubSubMenu = document.createElement("li");
