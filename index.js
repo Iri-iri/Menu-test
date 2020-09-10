@@ -24,25 +24,50 @@ const menu = [
     },
 ];
 
+function displayList () {
+  const listMenu = document.querySelector('#list');
 
-const listMenu = document.querySelector('#list');
+  menu.forEach(function (item) {
+    const itemMenu = document.createElement("li");
+    itemMenu.classList.add("item_menu");
+    itemMenu.innerHTML = item.name;
+    listMenu.appendChild(itemMenu);
 
-menu.forEach(function (item) {
-const itemMenu = document.createElement("li");
-itemMenu.innerHTML = item.name;
-listMenu.appendChild(itemMenu);
+    itemMenu.addEventListener("mouseover", () => {
+      // event.target.classList.add("submenu_visible");
+      // itemMenu.classList.toggle("submenu_visible");
+    })
 
-if (item.submenu) {
-const listSubmenu = document.createElement("ul");
-itemMenu.append(listSubmenu);
-};
-})
+    if (item.submenu) {
+      const listSubmenu = document.createElement("ul");
+      listSubmenu.classList.add("submenu");
+      itemMenu.append(listSubmenu);
 
+      item.submenu.forEach(function (elem) {
+        const itemSubMenu = document.createElement("li");
+        itemSubMenu.classList.add("item_submenu")
+        itemSubMenu.innerHTML = elem.name;
+        listSubmenu.appendChild(itemSubMenu);
 
-if (menu.submenu) {
-  menu.submenu.forEach(function (item) {
-    const itemSubMenu = document.createElement("li");
-    itemSubMenu.innerHTML = item.name;
-    listSubmenu.appendChild(itemSubMenu);
+        if (elem.submenu) {
+          const listSubSubmenu = document.createElement("ul");
+          itemSubMenu.append(listSubSubmenu);
+
+          elem.submenu.forEach(function (subElem) {
+            const itemSubSubMenu = document.createElement("li");
+            itemSubSubMenu.innerHTML = subElem.name;
+            listSubSubmenu.appendChild(itemSubSubMenu)
+          });
+        };
+        
+      });
+
+    };
+
   });
+
+  
 }
+
+displayList();
+
