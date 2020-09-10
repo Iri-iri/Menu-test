@@ -33,15 +33,17 @@ function displayList () {
     itemMenu.innerHTML = item.name;
     listMenu.appendChild(itemMenu);
 
-    itemMenu.addEventListener("mouseover", () => {
-      // event.target.classList.add("submenu_visible");
-      // itemMenu.classList.toggle("submenu_visible");
-    })
-
     if (item.submenu) {
+      
       const listSubmenu = document.createElement("ul");
       listSubmenu.classList.add("submenu");
-      itemMenu.append(listSubmenu);
+      itemMenu.addEventListener("mouseenter", () => {
+        itemMenu.append(listSubmenu);
+      })
+
+      itemMenu.addEventListener("mouseleave", () => {
+        itemMenu.querySelector(".submenu").remove();
+      })
 
       item.submenu.forEach(function (elem) {
         const itemSubMenu = document.createElement("li");
@@ -51,7 +53,9 @@ function displayList () {
 
         if (elem.submenu) {
           const listSubSubmenu = document.createElement("ul");
-          itemSubMenu.append(listSubSubmenu);
+          itemSubMenu.addEventListener("mouseenter", () => {
+            itemSubMenu.append(listSubSubmenu);
+          });
 
           elem.submenu.forEach(function (subElem) {
             const itemSubSubMenu = document.createElement("li");
@@ -61,12 +65,10 @@ function displayList () {
         };
         
       });
-
-    };
-
-  });
-
+   
+    }  
   
+  }); 
 }
 
 displayList();

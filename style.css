@@ -21,14 +21,8 @@
     position: absolute;
     padding: 0;
     background-color: green;
-    cursor: pointer;
-    
+    cursor: pointer;  
   }
-
-  /* .submenu_visible {
-    visibility: visible;
-  } */
-
 
   .item_submenu {
     cursor: pointer;
